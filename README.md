@@ -1,6 +1,6 @@
 VANESSA ROSE         
                                  JOSEPH MWITA                         
                                                                 AMOS KILONZO                  
-                                                                                                         SHALOM MKABANE
+                                                                                                         SHALOM MKABANE                             
                                                                                                                                                     HILLARY IBRAHIM
                                                                                                                                                                                         CALRSON KIPROTICH
