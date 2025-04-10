@@ -1,0 +1,58 @@
+{% extends 'admin_homepage.html' %}
+
+{% block content %}
+<div class="fund-allocation-container">
+    <h2 class="page-title">Fund Allocation</h2>
+
+    <!-- Show Message If There Are Pending Applications -->
+    {% if pending_applications %}
+        <p class="error-message">⚠ All applications must be reviewed before fund allocation.</p>
+    {% endif %}
+
+    <!-- Fund Summary & Download Button Row -->
+    <div class="fund-summary-container">
+        <div class="summary-card">
+            <h3>Total Funds Allocated</h3>
+            <p>KES {{ total_allocated }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>Remaining Funds</h3>
+            <p>KES {{ remaining_funds }}</p>
+        </div>
+        <!-- Download Button -->
+        <div class="summary-card button-card">
+            <a href="{% url 'export_fund_allocation_pdf' %}" class="btn btn-danger">
+                Download PDF
+            </a>
+        </div>
+    </div>
+
+    <!-- Fund Allocation Table -->
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Registration Number</th>
+                    <th>Parental Status</th>
+                    <th>Allocated Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in approved_apps %}
+                <tr>
+                    <td>{{ app.name }}</td>
+                    <td>{{ app.reg_no }}</td>
+                    <td>{{ app.parental_status }}</td>
+                    <td>KES {{ app.approved_amount }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="no-data">No approved applications found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

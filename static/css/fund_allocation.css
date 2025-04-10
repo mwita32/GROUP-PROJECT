@@ -1,0 +1,113 @@
+/* Page Container */
+.fund-allocation-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Page Title */
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Error Message */
+.error-message {
+    color: #d9534f;
+    background: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Fund Summary & Download Button in Same Row */
+.fund-summary-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.summary-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 200px;
+}
+
+.summary-card h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.summary-card p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Download Button Styled Like a Card */
+.button-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-danger {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+    background-color: #b52b3b;
+}
+
+/* Table Container */
+.table-container {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+/* Styled Table */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: white;
+}
+
+.styled-table th, .styled-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.styled-table th {
+    background: #007bff;
+    color: white;
+}
+
+.styled-table tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+/* No Data Row */
+.no-data {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+}

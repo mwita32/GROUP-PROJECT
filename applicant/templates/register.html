@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block title %}Register New Applicant{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: url('{% static "images/login.jpeg" %}') no-repeat center fixed;
+        background-size: cover;
+    }
+    .center-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 70px;
+    }
+    .register-container {
+        max-width: 450px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+</style>
+
+<div class="center-container">
+    <div class="register-container">
+        <img src="{% static 'images/mmustlogo.png' %}" alt="Logo" class="img-fluid mb-3" style="max-width: 150px;">
+        <h2>Register New Applicant</h2>
+
+        {% if messages %}
+            <div id="alert-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+
+            <div class="mb-3 text-start">
+                <label for="regNumber" class="form-label">Registration Number</label>
+                <input type="text" class="form-control {% if form.reg_number.errors %}is-invalid{% endif %}"
+                       id="regNumber" name="reg_number" placeholder="e.g. ABC/C/01-00000/0000"
+                       value="{{ form.reg_number.value|default_if_none:'' }}"
+                       required pattern="^[A-Z]{3}/[A-Z]{1}/01-\d{5}/\d{4}$"
+                       title="Format: ABC/X/01-XXXXX/YYYY (e.g., ABC/C/01-00000/0000)">
+                {% for error in form.reg_number.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3 text-start">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+                       id="email" name="email" placeholder="Enter your email"
+                       value="{{ form.email.value|default_if_none:'' }}" required>
+                {% for error in form.email.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+
+            <div class="mb-3 text-start">
+                <label for="fullName" class="form-label">Full Name</label>
+<input type="text"
+       class="form-control {% if form.full_name.errors %}is-invalid{% endif %}" id="fullName" name="full_name"
+       placeholder="Enter your full name"
+       value="{{ form.full_name.value|default_if_none:'' }}"
+       required
+       pattern="^[A-Z]{1}[A-Za-z' ]+"
+       title="Full Name is required and can only contain letters, apostrophes, and spaces.">
+                {% for error in form.full_name.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+
+            <div class="mb-3 text-start">
+                <label for="password" class="form-label">Create Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control {% if form.password1.errors %}is-invalid{% endif %}"
+                           id="password" name="password1" placeholder="Create new password" required>
+                    <span class="input-group-text">
+                        <input type="checkbox" id="togglePassword"> Show
+                    </span>
+                </div>
+                {% for error in form.password1.errors %}
+                    <div class="invalid-feedback d-block">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-3 text-start">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control {% if form.password2.errors %}is-invalid{% endif %}"
+                           id="confirmPassword" name="password2" placeholder="Confirm password" required>
+                    <span class="input-group-text">
+                        <input type="checkbox" id="toggleConfirmPassword"> Show
+                    </span>
+                </div>
+                {% for error in form.password2.errors %}
+                    <div class="invalid-feedback d-block">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <p>Already have an account? <a href="{% url 'login' %}"> Login here </a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("togglePassword").addEventListener("change", function() {
+        let passwordField = document.getElementById("password");
+        passwordField.type = this.checked ? "text" : "password";
+    });
+
+    document.getElementById("toggleConfirmPassword").addEventListener("change", function() {
+        let confirmField = document.getElementById("confirmPassword");
+        confirmField.type = this.checked ? "text" : "password";
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+            let alertContainer = document.getElementById("alert-container");
+            if (alertContainer) {
+                alertContainer.style.transition = "opacity 1s";
+                alertContainer.style.opacity = "0";
+                setTimeout(() => alertContainer.remove(), 1000);
+            }
+        }, 3000);
+    });
+</script>
+{% endblock %}

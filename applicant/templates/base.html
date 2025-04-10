@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MMUST Authentication{% endblock %}</title>
+
+    <style>
+        body {
+            padding-top: 70px; /* Ensures content does not hide under fixed navbar */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Fixed Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container justify-content-center">
+        <a class="navbar-brand fw-bold text-primary">WELCOME TO RATTANSI BURSARY PORTAL</a>
+    </div>
+</nav>
+
+<!-- Content Container with Margin to Avoid Navbar Overlap -->
+
+<div class="container mt-4">
+
+    {% block content %}
+    {% endblock %}
+</div>
+
+{% bootstrap_javascript %}
+</body>
+</html>

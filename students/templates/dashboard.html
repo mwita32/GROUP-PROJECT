@@ -1,0 +1,51 @@
+{% extends "homepage.html" %}
+{% block content %}
+<div class="dashboard-container">
+    <h1>Student Dashboard</h1>
+
+    <!-- Welcome Text (NOT inside a panel) -->
+    <p class="welcome-text">Welcome, {{ request.user.full_name }}!</p>
+
+    <div class="dashboard-grid">
+        <!-- Application Status Panel -->
+        <div class="dashboard-card">
+            <h3>Application Status</h3>
+            {% if settings.is_open %}
+                <p>Applications are <strong>OPEN</strong>!</p>
+                <p>Deadline: <strong>{{ settings.deadline }}</strong></p>
+                <p>Academic Year: <strong>{{ settings.academic_year }}</strong></p>
+            {% else %}
+                <p>Applications are <strong>CLOSED</strong>.</p>
+            {% endif %}
+        </div>
+
+        <!-- Application Progress Panel -->
+        <div class="dashboard-card">
+            <h3>Application Progress</h3>
+            {% if application.status == "Pending" %}
+                <p>Your application is <strong>Pending Review</strong>.</p>
+            {% elif application.status == "Reviewed" %}
+                <p>Your application has been <strong>Reviewed</strong>.</p>
+            {% elif application.status == "Approved" %}
+                <p>Congratulations! Your application is <strong>Approved</strong>.</p>
+            {% else %}
+                <p>You have not started your application.</p>
+            {% endif %}
+        </div>
+
+        <!-- Notifications Panel -->
+
+
+        <!-- Fund Allocation Panel -->
+        <div class="dashboard-card">
+            <h3>Fund Allocation</h3>
+            {% if application.status == "Approved" %}
+                <p>You have been awarded the bursary! Check your student portal for details.</p>
+            {% else %}
+                <p>Fund allocation will be updated once applications are reviewed.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'admin_homepage.html' %}
+{% block content %}
+<h2>Bursary Applications</h2>
+
+<table border="1" cellspacing="0" cellpadding="8" style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Status</th>
+            <th>Date Submitted</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for app in all_apps %}
+        <tr>
+            <td>{{ app.reg_no }}</td>
+            <td>{{ app.status }}</td>
+            <td>{{ app.submitted_at }}</td>
+            <td>
+                {% if app.status == 'Pending' %}
+                    <a href="{% url 'review_application_details' app.id %}">Review</a>
+                {% else %}
+                    Viewed
+                <a href="{% url 'student_details' app.id %}">Student details</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No applications found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
